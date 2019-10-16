@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        .el-carousel__item:nth-child(2n) {
+            background-color: #99a9bf;
+        }
+
+        .el-carousel__item:nth-child(2n+1) {
+            background-color: #d3dce6;
+
+        }
+
+        .xt img {
+            cursor: pointer;
+
+            transition: all 0.6s;
+        }
+
+        .xt img:hover {
+            transform: scale(1.1);
+        }
+
+        .m-line {
+            width: 0%;
+            height: 1px;
+            background: green;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" v-cloak="">
+        <div style="height:80px;padding-right: 300px;position:relative;z-index: 90;overflow: hidden;">
+            <div style="float: left;">
+                <img style="width:80px;height:50px;padding: 0px 40px;padding-top: 15px;"
+                    src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvZjc0MTI0MDFiMDZjZjdjYmI4OTg5MTBjMTE2YzZlNzYucG5n.png"
+                    alt="">
+            </div>
+            <div style="float: right;">
+                <div v-for="i in arr" style="float: left;line-height: 60px;padding: 0 20px;">
+                    <a :href="i.path">
+                        {{i.name}}
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        <div style="min-height: 500px;">
+            <router-view></router-view>
+        </div>
+        <div style="height: 192px;background: #f3f3f3;padding-bottom: 40px;">
+            <div style="padding-top: 70px;float: left;padding-left: 180px;">
+                <p
+                    style="font-size: 26px;font-weight: normal;font-style: normal;color:#666666;vertical-align: bottom;;">
+                    联系</p>
+                <p style="font-size: 13px;font-weight: normal;font-style: normal;color:white;vertical-align: bottom;;">
+                    Contact</p>
+            </div>
+            <div style="padding-top: 70px;float: left;padding-left: 180px;">
+                <p
+                    style="font-size: 16px;font-weight: normal;font-style: normal;color:#666666;vertical-align: bottom;;">
+                    关注我们</p>
+            </div>
+            <div style="padding-top: 70px;float: left;padding-left: 180px;">
+                <p
+                    style="font-size: 16px;font-weight: normal;font-style: normal;color:#666666;vertical-align: bottom;;">
+                    起飞页自主建站平台</p>
+                <div style="line-height: 25px;padding-top: 16px;">
+                    <p
+                        style="font-size: 14px;font-weight: normal;font-style: normal;color:#969696;vertical-align: bottom;;">
+                        地址：苏州市建外SOHO东区2号楼</p>
+                    <p
+                        style="font-size: 14px;font-weight: normal;font-style: normal;color:#969696;vertical-align: bottom;;">
+                        邮编：100000</p>
+                    <p
+                        style="font-size: 14px;font-weight: normal;font-style: normal;color:#969696;vertical-align: bottom;;">
+                        电话：010-69557550</p>
+                </div>
+            </div>
+            <div style="padding-top: 70px;float: left;padding-left: 180px;">
+                <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTgvMDgvNjFjNTQ1NWFmY2MyNGViMmZjY2VkOTk3YmMwMWE2MGMtMTAweDEwMC5wbmc_p_p100_p_3D.png"
+                    alt="">
+                <p
+                    style="font-size: 14px;font-weight: normal;font-style: normal;color:black;vertical-align: bottom;text-align: center;">
+                    微信</p>
+            </div>
+            <div style="padding-top: 70px;float: left;padding-left: 50px;">
+                <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTgvMDgvNjFjNTQ1NWFmY2MyNGViMmZjY2VkOTk3YmMwMWE2MGMtMTAweDEwMC5wbmc_p_p100_p_3D.png"
+                    alt="">
+                <p
+                    style="font-size: 14px;font-weight: normal;font-style: normal;color:black;vertical-align: bottom;text-align: center;">
+                    微博</p>
+            </div>
+
+        </div>
+        <div style="height:60px;text-align: left;padding-left: 160px;">
+            <p style="font-size: 14px;color: #808080;line-height: 60px;">COPYRIGHT (©) 2019 茶叶类网站 京ICP备41414141414-1号
+            </p>
+        </div>
+    </div>
+    <template id="no1">
+        <div>
+            <!-- 轮播图 -->
+            <div class="block" style="margin-top: -80px;">
+                <span class="demonstration"></span>
+                <el-carousel width="100%" height="800px">
+                    <el-carousel-item v-for="item in arr">
+                        <img :src="item" alt="" style="width: 100%;height: 100%;">
+                    </el-carousel-item>
+                </el-carousel>
+                <!-- 新茶上市 -->
+                <div style="width: 100%;height: 1272px;background: #f7f7f7;padding-top: 60px;">
+                    <div style="width:1290px;height:1170px;background: #f7f7f7;margin: 0 auto;">
+                        <div style="text-align: center;padding-top: 30px;">
+                            <p
+                                style="font-size: 24px;font-weight: normal;font-style: normal;color: #232323;vertical-align: bottom;">
+                                新茶上市</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <p
+                                style="font-size: 13px;font-weight: normal;font-style: normal;color:#999999;vertical-align: bottom;;">
+                                Tea Leave</p>
+                        </div>
+                        <div style="overflow: hidden;">
+                            <div v-lee class="m-items" v-for="i in arr1" style="float: left;padding: 35px 39px;">
+                                <!-- 茶叶 -->
+                                <div class="xt">
+                                    <img :src="i.img" alt="" style="width: 352px;height:352px;">
+                                </div>
+                                <div style="padding-top: 20px;">
+                                    <!-- 名字 -->
+                                    <div class="m-name"
+                                        style="text-align: center;color: #555555;font-size: 16px;line-height: 40px;">
+                                        {{i.name}}
+                                    </div>
+                                    <div style="width: 100%;height: 1px;background: #ccc;">
+                                        <div class="m-line"></div>
+                                    </div>
+                                    <!-- 人民币 -->
+                                    <div style="text-align: center;color: #555555;font-size: 16px;padding-top: 10px;">
+                                        {{i.rmb}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            style="width:84px;height:47px;background:#90af6b;margin: 0 auto;line-height: 44px;text-align: center;color: white;font-size: 40px;margin-top: 40px;">
+                            ➡
+                        </div>
+                    </div>
+                </div>
+                <!-- 关于我们 -->
+
+                <div
+                    style="background-image: url('https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvYTMxNGNjMzEzM2JhMGRkOTE2NTA0NmYwYTZjMDlmZjcuanBn.jpg'); background-repeat:no-repeat; background-size:cover; background-attachment:fixed; background-position:center center;width: 100%;min-height: 800px;;z-index: -1;">
+                    <div style="padding-top: 140px;">
+                        <div style="width: 1280px;height: 523px;margin: 0 auto;">
+                            <div style="text-align: center;padding-top: 50px;">
+                                <p
+                                    style="font-size: 26px;font-weight: normal;font-style: normal;color:white;vertical-align: bottom;;">
+                                    关于我们</p>
+                            </div>
+                            <div style="text-align: center;padding-top: 5px;">
+                                <p
+                                    style="font-size: 13px;font-weight: normal;font-style: normal;color:white;vertical-align: bottom;;">
+                                    about</p>
+                            </div>
+                            <div style="width:1190px;height:294px;background:#f7f7f7;margin: 0 auto;margin-top: 40px;">
+                                <div style="float: left;">
+                                    <img style="width:521px;height:270px;padding: 12px 10px;"
+                                        src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvOGJiMjZlNDUwZjY0NjBkNWNiMmE4NTg4YjBhYTY5ZmMtNTQweDI4MC5qcGc_p_p100_p_3D.jpg"
+                                        alt="">
+                                </div>
+                                <div
+                                    style="width:611px;height: 270px;background:#f7f7f7;float: left;margin: 12px 10px;">
+                                    <span
+                                        style="font-size: 14px;line-height: 28px;width: 546px;display: inline-block;padding: 50px 20px;">茶叶源于中国，茶叶最早是被作为祭品使用的。但从春秋后期就被人们作为菜食，在西汉中期发展为药用，西汉后期才发展为宫廷高级饮料，普及民间作为普通饮料那是西晋以后的事。发现最早人工种植茶叶的遗迹在浙江余姚的田螺山遗址，已有6000多年的历史。饮茶始于中国。</span>
+                                    <!-- 了解更多     -->
+                                    <div
+                                        style="width:110px;height:41px;background:#90af6b;line-height: 41px;text-align: center;color: white;font-size:14px;margin: -37px 20px;">
+                                        了解更多
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- 底部logo -->
+
+
+            </div>
+            <div style="background:white;display: flex;padding: 60px 170px;">
+                <div style="flex: 1;">
+                    <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMjMwZTdjYTlmNmIwNjRhYjM2NzIzZGZiYTViMzU2MjQtMTUweDYwLnBuZw_p_p100_p_3D_p_p100_p_3D.png"
+                        alt="">
+                </div>
+                <div style="flex: 1;">
+                    <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvYzU0OGUxMmQwM2FhMTE4MmE1ZmM5YWY4YjBlZDNhODMtMTUweDYwLnBuZw_p_p100_p_3D_p_p100_p_3D.png"
+                        alt="">
+                </div>
+                <div style="flex: 1;">
+                    <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvZmE3YjM1YzA3Mzg5Mjg4ODVjOTY3NDRjYTNkZjAzNDQtMTUweDYwLnBuZw_p_p100_p_3D_p_p100_p_3D.png"
+                        alt="">
+                </div>
+                <div style="flex: 1;">
+                    <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMTdlYWNiYTc0ZmU4MDZkMTk1NGI5MWY0MTdhMzUzZDgtMTUweDYwLnBuZw_p_p100_p_3D_p_p100_p_3D.png"
+                        alt="">
+                </div>
+                <div style="flex: 1;">
+                    <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMDFjMDE4YjAwYzA0MWMwYmQ3MTIzYTkzZjVhMTkyOTgtMTUweDYwLnBuZw_p_p100_p_3D_p_p100_p_3D.png"
+                        alt="">
+                </div>
+                <div style="flex: 1;">
+                    <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMWQyNGZhYmI0ZWRiODk1MGUxMmI3MzkxOGU3OTY1ZDktMTUweDYwLnBuZw_p_p100_p_3D_p_p100_p_3D.png"
+                        alt="">
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="no2">
+        <div>
+            <div>
+                <img style="width:100%;height: 200px;"
+                    src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvNDlhZTM4YTg2N2VmNzVhNDA3M2RmNzRiYTFmOThjMjYuanBn.jpg"
+                    alt="">
+            </div>
+            <div style="width: 100%;height: 200px;margin-top: 20px;padding: 20px 0px;">
+                <div style="width: 1160px;height: 200px;margin: 0 auto;">
+                    <div style="text-align: center;padding-top: 40px;">
+                        <span
+                            style="font-size: 24px;font-weight: normal;font-style: normal;color: #232323;display: block;padding: 0 0 5px 0;">春茶</span>
+                    </div>
+                    <div style="text-align: center;padding: 10px 222px;">
+
+                        <p style="font-size: 14px;color: #808080;">饮茶不但是传统饮食文化，同时，由于茶中含有多种抗氧化物质与抗氧化营养素，对于消除自由基有一定的效果。
+                            因此喝茶也有助防老，具养生保健功能，每天喝三两杯茶可起到防老的作用。
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- 动态时间 -->
+            <div style="padding: 0 200px;">
+                <div
+                    style="overflow: hidden;border-bottom: 1px solid rgb(147, 147, 150);display: flex;padding: 20px 150px;border-top: 1px solid rgb(147, 147, 150);">
+                    <div style="flex: 1;border-right: 1px solid rgb(147, 147, 150);padding: 60px 50px;">
+                        <abc :b_num=" 147" b_title="历史悠久"></abc>
+                    </div>
+                    <div style="flex: 1;border-right: 1px solid rgb(147, 147, 150);padding: 60px 50px;">
+                        <abc :b_num=" 258" b_title="历史悠久"></abc>
+                    </div>
+                    <div style="flex: 1;border-right: 1px solid rgb(147, 147, 150);padding: 60px 50px;">
+                        <abc :b_num=" 369" b_title="历史悠久"></abc>
+                    </div>
+                    <div style="flex: 1;padding: 60px 50px;">
+                        <abc :b_num=" 456" b_title="历史悠久"></abc>
+                    </div>
+                </div>
+            </div>
+            <!-- 喝茶的好处 -->
+            <div style="width: 100%;height: 200px;margin-top: 20px;padding: 20px 0px;">
+                <div style="width: 1160px;height: 200px;margin: 0 auto;">
+                    <div style="text-align: center;padding-top: 40px;">
+                        <span
+                            style="font-size: 24px;font-weight: normal;font-style: normal;color: #232323;display: block;padding: 0 0 5px 0;">喝茶的好处</span>
+                    </div>
+                    <div style="text-align: center;padding: 30px 102px;">
+
+                        <p style="font-size: 14px;color: #808080;">
+                            饮茶不但是传统饮食文化，同时，由于茶中含有多种抗氧化物质与抗氧化营养素，对于消除自由基有一定的效果。因此喝茶也有助防老，具养生保健功能，每天喝三两杯茶可起到防老的作用。茶叶中含有多种维生素和氨基酸，喝茶对于清油解腻，增强神经兴奋以及消食利尿也具有一定的作用。
+                            但并不是喝得越多越好，也不是所有的人都适合喝茶。一般来说，每天1-2次，每次3-5克、400毫升的饮量是比较适当的。一般，人们说喝茶还指喝水。
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- 喝茶的好处简介 -->
+            <div style="height:470px;padding:100px 120px;">
+                <div style="height:460px;display: flex;">
+                    <div style="flex: 1;margin:30px 40px ;" v-move>
+                        <div>
+                            <img style="width: 100%;"
+                                src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvNjczNTEyZGI2NGM2N2U0MzdjMjMxNGMyYzc3MjRmM2YuanBn.jpg"
+                                alt="">
+                        </div>
+                        <div style="text-align: center;">
+                            <p style="font-size: 18px;color: #808080;padding-top: 10px;">茶园规则</p>
+                        </div>
+                        <div style="text-align: left;padding-top: 10px;">
+                            <p style="font-size:14px;color:#808080;line-height: 27px;">
+                                明万历二十三年（1595）张源撰写的《茶录》中，对当时洞庭东西山绿茶（炒青）的采摘、炒制有较为详细的记载，其炒制过程分杀青、轻团、焙干等工序，已与当今洞庭碧螺春的炒制工艺基本一致。
+                            </p>
+                        </div>
+                    </div>
+                    <div style="flex: 1;margin:30px 40px" v-move>
+                        <div>
+                            <img style="width: 100%;"
+                                src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvNGRmMDFhNzRmYTBhZWFiODIyYmM1MThhY2M2ZWFhOTYuanBn.jpg"
+                                alt="">
+                        </div>
+                        <div style="text-align: center;">
+                            <p style="font-size: 18px;color: #808080;padding-top: 10px;">茶叶品质鉴别</p>
+                        </div>
+                        <div style="text-align: left;padding-top: 10px;">
+                            <p style="font-size:14px;color:#808080;line-height: 27px;">
+                                明万历二十三年（1595）张源撰写的《茶录》中，对当时洞庭东西山绿茶（炒青）的采摘、炒制有较为详细的记载，其炒制过程分杀青、轻团、焙干等工序，已与当今洞庭碧螺春的炒制工艺基本一致。
+                            </p>
+                        </div>
+                    </div>
+                    <div style="flex: 1;margin:30px 40px " v-move>
+                        <div>
+                            <img style="width: 100%;"
+                                src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvNDVhMmJlZTE1ZjE5MTc0OTQ2OTIxMTBiMjNkYWRiZDUuanBn.jpg"
+                                alt="">
+                        </div>
+                        <div style="text-align: center;">
+                            <p style="font-size: 18px;color: #808080;padding-top: 10px;">冲泡工艺</p>
+                        </div>
+                        <div style="text-align: left;padding-top: 10px;">
+                            <p style="font-size:14px;color:#808080;line-height: 27px;">
+                                明万历二十三年（1595）张源撰写的《茶录》中，对当时洞庭东西山绿茶（炒青）的采摘、炒制有较为详细的记载，其炒制过程分杀青、轻团、焙干等工序，已与当今洞庭碧螺春的炒制工艺基本一致。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </template>
+    <template id="no3">
+        <div>
+            <!-- 茶叶导航 -->
+            <div style="background: rgba(244,244,244,0.5);padding: 40px 30px;">
+                <div style="float: left;line-height: 10px">
+                    <span style="font-size: 24px;">茶叶</span>
+                </div>
+                <div style="float: right;">
+                    <div @click="type=i" v-for="i in arr"
+                        style="float: left;line-height: 10px;padding: 0 25px;color: #808080;">
+                        {{i}}
+                    </div>
+                </div>
+            </div>
+            <!-- 茶叶品种 -->
+
+            <div style="overflow: hidden;margin-top: 30px;">
+                <div v-if="type=='全部'">
+                    <div v-for="i in arr2" style="width:18%;float: left;margin: 0 15px;" v-lee>
+                        <img style="width: 100%;" :src="i.img" alt="">
+                        <p class="m-name">{{i.name}}</p>
+                        <div style="height: 1px; background: #ccc;width: 100%;margin: 10px 0; ">
+                            <div class="m-line"></div>
+                        </div>
+                        <p style="color: #8e8e8e;font-size: 16px;">{{i.rmb}}</p>
+                        <div
+                            style="width:30px;height:26px;border: #8e8e8e solid 1px;text-align: center;margin: 20px 0px;">
+                            <span style="line-height: 26px;">➡</span>
+                        </div>
+                    </div>
+                </div>
+                <div v-else>
+
+                    <div v-lee v-if="i.type==type" v-for="i in arr2" style="width:18%;float: left;margin: 0 15px;">
+                        <img style="width: 100%;" :src="i.img" alt="">
+                        <p class="m-name">{{i.name}}</p>
+                        <div style="height: 1px; background: #ccc;width: 100%;margin: 10px 0; ">
+                            <div class="m-line"></div>
+                        </div>
+                        <p style="color: #8e8e8e;font-size: 16px;">{{i.rmb}}</p>
+                        <div
+                            style="width:30px;height:26px;border: #8e8e8e solid 1px;text-align: center;margin: 20px 0px;">
+                            <span style="line-height: 26px;">➡</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </template>
+    <template id="no4">
+        <div>
+            <div>
+                <img style="width:100%;height: 200px;"
+                    src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvNzNlYjg4NTNhNmZkNTZiYWRhN2Q4ZjI4NjNkOWM1ODguanBn.jpg"
+                    alt="">
+            </div>
+            <div style="width: 100%;height: 200px;margin-top: 20px;">
+                <div style="width: 1160px;height: 200px;margin: 0 auto;">
+                    <div style="text-align: center;padding-top: 40px;">
+                        <span
+                            style="font-size: 24px;font-weight: normal;font-style: normal;color: #232323;display: block;padding: 0 0 5px 0;">种植基地</span>
+                    </div>
+                    <div style="text-align: center;padding: 0px 80px;">
+
+                        <p style="font-size: 14px;color: #808080;">公司拥有完整、科学、质量管理体系，通过ISO14001，ISO22000国际质量体系认
+                            证，有机产品认证，拥有大量先进、专业的生产设备和检测仪器，秉承“顾客至上，锐意进取”的经营理念，坚持“客户第一”的原则为广大客户提供优质的服务。
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- 图片 -->
+            <div style="padding-bottom: 70px;">
+                <div style="display: flex;padding: 0px 180px;">
+
+                    <div style="padding: 0px 5px;">
+                        <img style="width: 280px;height:280px;flex: 1;"
+                            src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvNWQ3ZTc0ZDI3NTEzM2MxZmZkYTVkZTFmY2FiNGFkZTctMzAweDMwMC5qcGc_p_p100_p_3D.jpg"
+                            alt="">
+                    </div>
+                    <div style="padding: 0px 5px;">
+                        <img style="width: 280px;height:280px;flex: 1;"
+                            src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvNzQwMmZhZTFiYWE3OTgxODA4MWYwM2I2N2UwZTU0ZDItMzAweDMwMC5qcGc_p_p100_p_3D.jpg"
+                            alt="">
+                    </div>
+                    <div style="padding: 0px 5px;">
+                        <img style="width: 280px;height:280px;flex: 1;"
+                            src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvOWVlYzA0NGVmYmNiZGQwYzE0M2QwYmZhMGY2MjNkMDUtMzAweDMwMC5qcGc_p_p100_p_3D.jpg"
+                            alt="">
+                    </div>
+                    <div style="padding: 0px 5px;">
+                        <img style="width: 280px;height:280px;flex: 1;"
+                            src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvMGQ5YWMxYWEzOWNmZmIzYzk4NDE0Njk4YzZmZGQwZjQtMzAweDMwMC5qcGc_p_p100_p_3D.jpg"
+                            alt="">
+                    </div>
+
+
+                </div>
+                <div style="display: flex;padding: 5px 180px;">
+
+                    <div style="padding: 0px 5px;">
+                        <img style="width: 280px;height:280px;flex: 1;"
+                            src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvOWVkYTg5ZjIzMWEzOGFjODE5NmJiYmYyOTA5YWEyZjctMzAweDMwMC5qcGc_p_p100_p_3D.jpg"
+                            alt="">
+                    </div>
+                    <div style="padding: 0px 5px;">
+                        <img style="width: 280px;height:280px;flex: 1;"
+                            src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvMTI1ZmM2NTk4YWE0NmFlY2JkOWY1NDAzYzkwYjM3ODctMzAweDMwMC5qcGc_p_p100_p_3D.jpg"
+                            alt="">
+                    </div>
+                    <div style="padding: 0px 5px;">
+                        <img style="width: 280px;height:280px;flex: 1;"
+                            src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvNGRmMDFhNzRmYTBhZWFiODIyYmM1MThhY2M2ZWFhOTYtMzAweDMwMC5qcGc_p_p100_p_3D.jpg"
+                            alt="">
+                    </div>
+                    <div style="padding: 0px 5px;">
+                        <img style="width: 280px;height:280px;flex: 1;"
+                            src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvMmZlZDQ0NjA2NDI0N2FmZWI4YTk0ZmQ0NGRiMDc5NzktMzAweDMwMC5qcGc_p_p100_p_3D.jpg"
+                            alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </template>
+    <template id="no5">
+        <div style="overflow: hidden;">
+            <div>
+                <img style="width:100%;height: 200px;"
+                    src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvOTIwYWRjMGM1M2U4OGQ2MTY0OWE0MzYwMmY5MWQ0NzQuanBn.jpg"
+                    alt="">
+            </div>
+            <!-- 新闻导航 -->
+            <div style="padding: 70px 80px;line-height: 50px;float: left;">
+                <div @click="btn(i,$idx)" v-for="(i, $idx) in arr2">
+                    {{i}}
+                </div>
+
+            </div>
+            <div style="float: left;width: 70%;padding: 35px 100px;">
+                <div v-show='n==0'>
+                    <div style="overflow: hidden;" v-for="i in arr">
+                        <div style="float:left;padding: 40px 10px;width: 687px;line-height: 20px;">
+                            <p style="font-size: 18px;">{{i.zt}}</p>
+                            <p style="font-size: 13px;padding: 20px 0;color: #999999;">{{i.jj}}
+                            </p>
+                        </div>
+
+                        <div style="float: left;width: 200px;padding: 40px 10px;">
+                            <img :src="i.img" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div v-show='n==1'>
+                    <div v-if="i.type==type" style="overflow: hidden;" v-for="i in arr">
+                        <div style="float:left;padding: 40px 10px;width: 687px;line-height: 20px;">
+                            <p style="font-size: 18px;">{{i.zt}}</p>
+                            <p style="font-size: 13px;padding: 20px 0;color: #999999;">{{i.jj}}
+                            </p>
+                        </div>
+
+                        <div style="float: left;width: 200px;padding: 40px 10px;">
+                            <img :src="i.img" alt="">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </template>
+    <template id="no6">
+        <div>
+            <div>
+                <img style="width:100%;height: 200px;"
+                    src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvNTYzNGI5ZDFlYmFkNzBkY2FlZmM1NDM0MWE0YzNkYWEuanBn.jpg"
+                    alt="">
+            </div>
+            <div style="text-align: center;width: 48%;margin: 0 auto;margin-top: 50px;">
+                <p style="font-size: 14px;color: #808080;">
+                    中国历史上有很长的饮茶纪录，已经无法确切地查明到底是在什么年代了，但是大致的时代是有说法的。并且也可以找到证据显示，确实在世界上的很多地方饮茶的习惯是从中国传过去的。
+
+                </p>
+            </div>
+            <div style="display: flex;padding: 40px 30px;">
+                <div style="flex: 1;text-align: center;border-right: 1px solid black;">
+                    <div>
+                        <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvZmM3ZjZkOTc4MzNjYjk5ZDliY2Y1NWQzMmNjNjFiNDYtODB4ODAuanBn.jpg"
+                            alt="">
+                    </div>
+                    <div>
+                        <p>邮箱</p>
+                        <p style="font-size: 14px;color: #bfbfbf;">info@email.com</p>
+                    </div>
+                </div>
+                <div style="flex: 1;text-align: center;border-right: 1px solid black;">
+                    <div>
+                        <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvZDY4ZDFlYWFjZjgyMmQxOGQxOTI2M2M3ZTE5Y2Y3NWEtODB4ODAuanBn.jpg"
+                            alt="">
+                    </div>
+                    <div>
+                        <p>手机</p>
+                        <p style="font-size: 14px;color: #bfbfbf;">13725415481/010 6888 6888</p>
+                    </div>
+                </div>
+                <div style="flex: 1;text-align: center;">
+                    <div>
+                        <img src="https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvNmZkOTQ2MGI2MzM1ZjUzNmY1MzY0NTFiYmJhMjA5ZGQtODB4ODAuanBn.jpg"
+                            alt="">
+                    </div>
+                    <div>
+                        <p>地址</p>
+                        <p style="font-size: 14px;color: #bfbfbf;">苏州市建外SOHO东区2号楼</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div style="text-align: center;margin: 40px 0;">
+                <img style="width: 1190px;height: 400px;" src="img/wang.jpg" alt="">
+            </div>
+        </div>
+    </template>
+    <template id="abc">
+        <div style="text-align: center;">
+            <div style="font-size: 60px;font-family: courier new;color: #3c3c3c;">
+                {{num}}
+            </div>
+            <div>
+                {{title}}
+            </div>
+        </div>
+    </template>
+</body>
+
+</html>
+<script src="vue.luyou/node_modules/vue/dist/vue.js"></script>
+<script src="vue.luyou/node_modules/vue-router/dist/vue-router.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    Vue.directive('lee', (a) => {
+        var name = a.querySelector('.m-name');
+        var line = a.querySelector('.m-line')
+        a.onmouseenter = function () {
+            name.style.color = "green";
+            line.style.width = "100%"
+        }
+        a.onmouseleave = function () {
+            name.style.color = "";
+            line.style.width = ""
+        }
+    })
+
+    Vue.directive('move', (a) => {
+        a.onmouseenter = function () {
+            a.style.transform = 'translateY(-20px)'
+            a.style.transition = .3 + 's'
+        }
+        a.onmouseleave = function () {
+            a.style.transform = 'translateY(0)'
+            a.style.transition = .3 + 's'
+        }
+    })
+    Vue.component('abc', {
+
+        template: '#abc',
+        props: ['b_num', 'b_title'],
+        data() {
+            return {
+                num: 0,
+                title: this.b_title
+            }
+        },
+        mounted() {
+            var time = setInterval(() => {
+                this.num++
+                if (this.num >= this.b_num) {
+                    this.num = this.b_num
+                    clearInterval(time)
+                }
+            }, 1000 / this.b_num)
+        }
+    })
+    var router = new VueRouter({
+        routes: [{
+                path: '/',
+                component: {
+                    template: '#no1',
+                    data() {
+                        return {
+                            arr: [
+                                'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvNTkxNjY4MzYwNTc4MTlhMDVjNGZmNmQ5NWFjMzU0OGIuanBn.jpg',
+                                'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvNjFhNzJlOWFhNThhNzVhZjY0ZGFlMjgzYTAzMDQ1NDAuanBn.jpg'
+                            ],
+                            arr1: [{
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvODMxNGZmNmYyYjkyNzcxZmY2N2U5NjdlZjQyNjAzZWItNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '茉莉花茶',
+                                    rmb: '￥223.0'
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMGFkMzdiZDQwOGNjYWMwYzI0Y2JmNzdiMDZiNDg4ODAtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '白牡丹',
+                                    rmb: '￥223.0'
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvOTc4NTUwMDZjYzA1MDQ1OGVkMDFmZjE2N2I4YjNkOTctNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '白毫银针',
+                                    rmb: '￥258.0'
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMDMzMjg2Zjc0ZWU4M2ZiM2U5MTllZTgwMDc4MjRjNTAtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '云南普洱茶',
+                                    rmb: '￥500.0'
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMjY1ZjU4NWU5ZmNmYjkxMDBlMzc1YmFkMDQyNTkwMzEtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '湖北老青茶',
+                                    rmb: '￥500.0'
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMjhlYTFmMDQ0Y2NhOWI4NWEzYWZkMzExYzczZTY3MjQtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '霍山黄芽蒙洱银针',
+                                    rmb: '￥500.0'
+                                },
+                            ],
+
+                        }
+                    }
+
+                }
+            },
+            {
+                path: '/no2',
+                component: {
+                    template: '#no2'
+                }
+            },
+            {
+                path: '/no3',
+                component: {
+                    template: '#no3',
+
+                    data() {
+                        return {
+                            type: '全部',
+                            arr: [
+                                '全部', '绿茶', '黄茶', '乌龙茶', '红茶', '黑茶', '白茶', '花茶'
+                            ],
+                            arr2: [{
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvODMxNGZmNmYyYjkyNzcxZmY2N2U5NjdlZjQyNjAzZWItNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '茉莉花茶',
+                                    rmb: '￥223',
+                                    type: '花茶'
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMGFkMzdiZDQwOGNjYWMwYzI0Y2JmNzdiMDZiNDg4ODAtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '白牡丹',
+                                    rmb: '￥223.0',
+                                    type: '白茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvOTc4NTUwMDZjYzA1MDQ1OGVkMDFmZjE2N2I4YjNkOTctNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '白毫银针',
+                                    rmb: '￥258.0',
+                                    type: '白茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMDMzMjg2Zjc0ZWU4M2ZiM2U5MTllZTgwMDc4MjRjNTAtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '云南普洱茶',
+                                    rmb: '￥500.0',
+                                    type: '黑茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMjY1ZjU4NWU5ZmNmYjkxMDBlMzc1YmFkMDQyNTkwMzEtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '湖北老青茶',
+                                    rmb: '￥500.0',
+                                    type: '黑茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMjhlYTFmMDQ0Y2NhOWI4NWEzYWZkMzExYzczZTY3MjQtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '霍山黄芽蒙洱银针',
+                                    rmb: '￥500.0',
+                                    type: '黄茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvNWM4NmNiNjkzOTdjOTM4NWQ4MzI0MDdlZDhhY2EwMmUtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '蒙顶黄芽',
+                                    rmb: '￥450.0',
+                                    type: '黄茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvNWNjYjNmZjU3YWU2YjBmMmRiYWZmOTk2MzljY2E4N2MtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '冻顶乌龙茶',
+                                    rmb: '￥450.0',
+                                    type: '乌龙茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvNDM1OTBkNjFjM2ViOGU2YzUyYWU3ZmM2N2I3YjQwZGMtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '大红袍',
+                                    rmb: '￥450.0',
+                                    type: '乌龙茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvYzNjYmVkZWE4N2JmNzZjOTUyODdjZWUyYWQ4MjgyM2MtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '祁门红茶',
+                                    rmb: '￥550.0',
+                                    type: '红茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvMjc0Y2E2YTE1Nzc3Mjk4MTFhMDJiOTg0Y2ZlMzliY2MtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '正山小种',
+                                    rmb: '￥550.0',
+                                    type: '红茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvYTY5N2NjZmUxNzIwNTg1YjcwM2E2OTk2ZWY3N2U4NmEtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '西湖龙井特级',
+                                    rmb: '￥550.0',
+                                    type: '绿茶',
+                                },
+                                {
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvYWNkYWZkYWVmNGVlM2NiNmJlYTFjNWI5MWE2MzQwOGMtNDAweDQwMC5qcGc_p_p100_p_3D.jpg',
+                                    name: '洞庭碧螺春',
+                                    rmb: '￥550.0',
+                                    type: '绿茶',
+                                },
+                            ]
+                        }
+                    }
+                }
+            },
+            {
+                path: '/no4',
+                component: {
+                    template: '#no4'
+                }
+            },
+            {
+                path: '/no5',
+                component: {
+                    template: '#no5',
+                    data() {
+                        return {
+                            n: 0,
+                            type: '',
+                            arr2: [
+                                ' 全部新闻', '新茶动态', '产品新闻'
+                            ],
+                            arr: [{
+                                    zt: '2019茶叶展-第十六届上海国际茶业交易春季博览会',
+                                    jj: '野生种遍见于中国长江以南各省的山区，为小乔木状，叶片较大，常超过10厘米长，长期以来，经广泛栽培，毛被及叶型变化很大。茶叶可作饮品，含有多种有益成分，并有保健功效',
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvNWQ3ZTc0ZDI3NTEzM2MxZmZkYTVkZTFmY2FiNGFkZTctMjAweDEzMC5qcGc_p_p100_p_3D.jpg',
+                                    type: '新茶动态',
+                                },
+                                {
+                                    zt: '喝什么茶叶好?春天适合喝什么茶?喝白茶喝什么茶叶好?',
+                                    jj: '2017年10月27日，世界卫生组织国际癌症研究机构公布的致癌物清单初步整理参考，茶在3类致癌物清单中。属于对人类致癌性可疑，尚无充分的人体或动物数据的物质类。',
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvNzQwMmZhZTFiYWE3OTgxODA4MWYwM2I2N2UwZTU0ZDItMjAweDEzMC5qcGc_p_p100_p_3D.jpg',
+                                    type: '新茶动态'
+                                },
+                                {
+                                    zt: '服用“阿司匹林”尽量少喝茶?',
+                                    jj: '晋．常璩《华阳国志．巴志》：“周武王伐纣，实得巴蜀之师，......茶蜜......皆纳贡之。”这一记载表明在周朝的武王伐纣时，巴国就已经以茶与其它珍贵产品纳贡与周武王了。《华阳国志》中还记载，那时并...',
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDUvMmZlZDQ0NjA2NDI0N2FmZWI4YTk0ZmQ0NGRiMDc5NzktMjAweDEzMC5qcGc_p_p100_p_3D.jpg',
+                                    type: '产品新闻'
+                                },
+                                {
+                                    zt: '饮用碧螺春茶的几个注意事项?',
+                                    jj: '市卫计委表示，今年，北京将按照市委十六次全会部署的原则，启动医疗服务价格改革。据悉，改革的总体原则将是“...',
+                                    img: 'https://ccdn.goodq.top/caches/9b69daffc17579b848483c854813cad2/aHR0cHM6Ly81Y2RkM2FhNWM0NmVhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTkvMDQvNDVhMmJlZTE1ZjE5MTc0OTQ2OTIxMTBiMjNkYWRiZDUtMjAweDEzMC5qcGc_p_p100_p_3D.jpg',
+                                    type: '产品新闻',
+                                },
+                            ]
+                        }
+                    },
+                    methods: {
+                        btn(a, b) {
+                            this.type = a
+                            if (b == 0) {
+                                this.n = 0
+                            } else {
+                                this.n = 1
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                path: '/no6',
+                component: {
+                    template: '#no6'
+                }
+            },
+
+        ]
+    })
+    new Vue({
+        el: '#box',
+        router,
+        data: {
+            arr: [{
+                    name: '首页',
+                    path: '#/'
+                },
+                {
+                    name: '关于',
+                    path: '#/no2'
+                },
+                {
+                    name: '茶叶',
+                    path: '#/no3'
+                },
+                {
+                    name: '基地',
+                    path: '#/no4'
+                },
+                {
+                    name: '新闻',
+                    path: '#/no5'
+                },
+                {
+                    name: '联系',
+                    path: '#/no6'
+                },
+            ]
+        }
+    })
+</script>
