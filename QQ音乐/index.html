@@ -144,7 +144,7 @@
         <div>
 
         </div>
-    </template>
+    </template>0
     <template id="geshou">
         <div>
             <div>
@@ -158,18 +158,16 @@
         <div>
             <div v-for="i in lll">
                 <p>
-                    <a :href="'#/no5/'+i.data.songmid+'/'+i.data.songname"> {{i.data.songname}}</a>                
+                    <a :href="'#/no5/'+i.data.songmid+'/'+i.data.songname"> {{i.data.songname}}</a>
                     <span style="float: right;">
                         {{i.data.singer[0].name}}
-                </span>
+                    </span>
                 </p>
             </div>
         </div>
 
     </template>
-
 </body>
-
 </html>
 <script src="vue.luyou/node_modules/vue/dist/vue.js"></script>
 <script src="vue.luyou/node_modules/vue-router/dist/vue-router.js"></script>
@@ -189,9 +187,7 @@
                             value: '',
                             search2: '',
                             hotkey: '',
-
                         }
-
                     },
                     methods: {
                         xjbx(a) {
@@ -207,7 +203,6 @@
                                 }).then((data) => {
                                 console.log(data)
                                 this.search2 = data.data.data.song.list;
-
                             })
                         }
                     },
@@ -253,7 +248,8 @@
                     },
                     created() {
                         this.$http.jsonp(
-                            'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?g_tk=5381&uin=0&format=jsonp&jsonpCallback=callback&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid='+this.$route.params.id+'&_=1512563984096', {
+                            'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?g_tk=5381&uin=0&format=jsonp&jsonpCallback=callback&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=' +
+                            this.$route.params.id + '&_=1512563984096', {
                                 jsonpCallback: 'callback',
                             }).then((data) => {
                             console.log(data.data.songlist)
